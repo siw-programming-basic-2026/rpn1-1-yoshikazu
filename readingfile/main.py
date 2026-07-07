@@ -10,19 +10,19 @@ def calculate(a, b, operator):
             return "ERROR:0では割れません"
         return a/b
     else:
-        return "Erroe:不正な演算子です。"
+        return "ERROR:不正な演算子です。"
 
 
 operators = {"+","-","*","/"}
 
 
 
-with open("./expressions.txt", "r", encoding="utf-8") as file:
+with open("./rpn_expressions_1000_float_mixed.txt", "r", encoding="utf-8") as file:
     for line in file:
         expression = line.strip()
-        print("expression:", expression)
+        print("与えられた式:", expression)
 
-        print(expression.split())
+        #print(expression.split())
 
 
 
@@ -34,13 +34,15 @@ with open("./expressions.txt", "r", encoding="utf-8") as file:
 
         tokens = expression.split()
         stack = []
+        err = False
 
-        print("tokens:",tokens)
-        print("stack:",stack)
+
+        #print("tokens:",tokens)
+        #print("stack:",stack)
 
         for token in tokens:
-            print("token:", token)
-            print("stack before:", stack)
+            #print("token:", token)
+            #print("stack before:", stack)
 
             if token in operators:
                 # TODO:
@@ -50,10 +52,12 @@ with open("./expressions.txt", "r", encoding="utf-8") as file:
                 # a = stack.pop()
                 if len(stack) < 2:
                     print("値が足りません")
+                    err = True
+                    print()
                     break
                 
                 else:
-                    print("TODO: stackから2つ取り出す")
+                    #print("TODO: stackから2つ取り出す")
                     b = stack.pop()
                     a = stack.pop()
 
@@ -62,7 +66,7 @@ with open("./expressions.txt", "r", encoding="utf-8") as file:
                 #
                 # result = calculate(a, b, token)
 
-                    print("TODO: calculate()で計算する")
+                    #print("TODO: calculate()で計算する")
                     result=calculate(a,b,token)
 
                 # TODO:
@@ -70,7 +74,7 @@ with open("./expressions.txt", "r", encoding="utf-8") as file:
                 #
                 # stack.append(result)
 
-                    print("TODO: 結果をstackに戻す")
+                    #print("TODO: 結果をstackに戻す")
                     stack.append(result)
 
             else:
@@ -78,18 +82,30 @@ with open("./expressions.txt", "r", encoding="utf-8") as file:
                 # token を整数に変換して stack に入れましょう。
                 #
                 # stack.append(int(token))
-                if token.isdigit():
-                    print("TODO: 数字をstackに入れる")
-                    stack.append(int(token))
-                else:
-                    print("不正な入力です。計算を止めます。")
+                # if token.isdigit():
+                #     #print("TODO: 数字をstackに入れる")
+                #     stack.append(int(token))
+                # else:
+                #     print("不正な入力です。")
+                #     print()
+                #     err = True
+                #     break
+                try:
+                    stack.append(float(token))
+                except ValueError:
+                    print("不正な入力です。")
+                    print()
+                    err = True
                     break
-                
 
-            print("stack after:", stack)
-            print("-----")
-        if len(stack)!=1:
-            print("値が2つ以上あるので演算子が足りません。")
-        else:    
-            print("最後のstack:", stack)
+            #print("stack after:", stack)
+            #print("-----")
+        if len(stack)==1 and err == False:
+            print(expression,"=>",stack[0])
             print()
+            
+            
+        elif len(stack)>1 and err==False:    
+            print("演算子が足りません。")
+            print()
+       
