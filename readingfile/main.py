@@ -24,7 +24,7 @@ with open("./rpn_expressions_1000_float_mixed.txt", "r", encoding="utf-8") as fi
 
         #print(expression.split())
 
-
+shutd
 
 
 
