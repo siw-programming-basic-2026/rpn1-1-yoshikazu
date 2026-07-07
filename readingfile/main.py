@@ -1,13 +1,23 @@
 def calculate(a, b, operator):
     if operator == "+":
         return a + b
-    
+    elif operator == "-":
+        return a - b
+    elif operator == "*":
+        return a * b
+    elif operator == "/":
+        if b == 0:
+            return "ERROR:0では割れません"
+        return a/b
+    else:
+        return "Erroe:不正な演算子です。"
 
-operators = {"+"}
+
+operators = {"+","-","*","/"}
 
 
 
-with open("expressions.txt", "r", encoding="utf-8") as file:
+with open("./expressions.txt", "r", encoding="utf-8") as file:
     for line in file:
         expression = line.strip()
         print("expression:", expression)
