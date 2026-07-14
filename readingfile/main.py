@@ -17,14 +17,14 @@ operators = {"+","-","*","/"}
 
 
 
-with open("./rpn_expressions_1000_float_mixed.txt", "r", encoding="utf-8") as file:
+with open("./rpn_expressions_1000_mixed.txt", "r", encoding="utf-8") as file:
     for line in file:
         expression = line.strip()
         print("与えられた式:", expression)
 
         #print(expression.split())
 
-shutd
+
 
 
 
